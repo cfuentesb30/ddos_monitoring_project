@@ -1,0 +1,31 @@
+body {
+    background-color: #f8f9fa; /* Color de fondo más suave */
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.container h1 {
+    color: #343a40; /* Color del texto */
+}
+
+.card {
+    border: none; /* Sin borde para un aspecto más limpio */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.card-title {
+    font-weight: 600; /* Mayor peso de la fuente */
+}
+
+.text-center {
+    margin: 20px 0; /* Margen en el botón */
+}
+
+.btn {
+    padding: 10px 20px; /* Espaciado más generoso */
+    font-size: 16px; /* Tamaño de fuente más grande */
+}

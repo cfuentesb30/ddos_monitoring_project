@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Monitoreo de Ataques DDoS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Monitor de Seguridad en Red</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Dashboard de Monitoreo de Ataques DDoS</h1>
+        
+        <!-- Formulario para ingresar la IP -->
+        <div class="mb-3">
+            <label for="ipAddress" class="form-label">Dirección IP a Atacar</label>
+            <input type="text" class="form-control" id="ipAddress" placeholder="Ingrese la dirección IP">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-danger" id="attackButton">Iniciar Ataque DDoS</button>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Gráfico de Uso de CPU -->
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Uso de CPU (%)</h5>
+                        <canvas id="cpuChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Gráfico de Uso de Memoria -->
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Uso de Memoria (%)</h5>
+                        <canvas id="memoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Gráfico de Tráfico de Red -->
+            <div class="col-lg-4 col-md-12 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Tráfico de Red (MB)</h5>
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Código para gráficos y actualización de datos
+        // ... [código anterior de gráficos] ...
+
+        document.getElementById('attackButton').addEventListener('click', async () => {
+            const ipAddress = document.getElementById('ipAddress').value;
+            const response = await fetch('/attack', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ip_address: ipAddress })
+            });
+            const result = await response.json();
+            alert(result.message);
+        });
+
+        setInterval(updateData, 5000);
+    </script>
+</body>
+</html>
